@@ -1,4 +1,11 @@
-const fs = require('fs'); 
+const getNotes = require('./notes');
+const msg = getNotes();
+console.log(msg);
 
-//fs.writeFileSync('notes.txt', 'My name is Anton');
-fs.appendFileSync('notes.txt', '. I am 20 years old');
+
+
+
+
+/*const add = require('./utils');
+const sum = add(4, -2);
+console.log(sum);*/
