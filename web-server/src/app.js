@@ -1,7 +1,9 @@
-const path = require('path');
-const express = require('express')
-/*import express from 'express'
-import path from 'path'*/
+import express from 'express'
+import path from 'path'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const app = express()
 const publicDirectoryPath = path.join(__dirname, '../public')
