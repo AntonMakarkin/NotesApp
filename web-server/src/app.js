@@ -5,10 +5,17 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const app = express()
-const publicDirectoryPath = path.join(__dirname, '../public')
 
-app.set('view engine','hbs') //adding settings
-app.use(express.static(publicDirectoryPath)) //load at first
+// Define paths for Express config
+const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, '../templates')
+
+// Setup handlebars engine and views location (adding settings)
+app.set('view engine','hbs')
+app.set('views', viewsPath)
+
+// Setup static directory to serve (load at first)
+app.use(express.static(publicDirectoryPath)) 
 
 app.get('/', (req, res) => { 
     res.render('index', { //get view and converts it inti html
