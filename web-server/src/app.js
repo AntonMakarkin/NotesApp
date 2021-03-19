@@ -2,6 +2,8 @@ import express from 'express'
 import path from 'path'
 import hbs from 'hbs'
 import { fileURLToPath } from 'url'
+import geocode from './utils/geocode.js'
+import forecast from './utils/forecast.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -49,10 +51,22 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    res.send({
-        forecast: 'It is snowing',
-        location: 'Moscow',
-        address: req.query.address
+    geocode(req.query.address, (error, { latitude, longitude, location } = {}) => {
+        if (error) {
+            return res.send({ error })
+        }
+    
+        forecast(latitude, longitude, (error, forecastData) => {
+            if (error) {
+                return res.send({ error })
+            }
+
+            res.send({
+                forecast: forecastData,
+                location: location,
+                address: req.query.address
+            })
+        })
     })
 })
 
