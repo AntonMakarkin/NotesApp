@@ -14,49 +14,31 @@ MongoClient.connect(connectionURL, { useUnifiedTopology: true}, { useNewUrlParse
 
     const db = client.db(databaseName)
 
-    /*db.collection('users').insertOne({
-        name: 'Vika',
-        age: 22
-    }, (error, result) => {
+    /*db.collection('users').findOne({ _id: new ObjectID("605dcf5c6ae5f93c580a6bdf") }, (error, user) => {
         if (error) {
-            return console.log('Unable to insert user')
+            return console.log('Unable to fetch')
         }
 
-        console.log(result.ops)
+        console.log(user)
     })*/
 
-    /*db.collection('users').insertMany([
-        {
-            name: 'Jen',
-            age: 28
-        }, {
-            name: 'Maria',
-            age: 26
-        }
-    ], (error, result) => {
-        if (error) {
-            return console.log('Unable to insert documents')
-        }
+    /*db.collection('users').find({ age: 20 }).toArray((error, users) => {
+        console.log(users)
+    })
 
-        console.log(result.ops)
+    db.collection('users').find({ age: 20 }).count((error, count) => {
+        console.log(count)
     })*/
 
-    /*db.collection('tasks').insertMany([
-        {
-            description: 'Go for a walk with my dog',
-            completed: true
-        }, {
-            description: 'Go in the university to the first lesson',
-            completed: true
-        }, {
-            description: 'Come back home',
-            completed: false
-        }
-    ], (error, result) => {
+    db.collection('tasks').findOne({ _id: new ObjectID("605dd3b83ad4f83d64f9c645") }, (error, task) => {
         if (error) {
-            return console.log('Unable to insert documents')
+            return console.log('Unable to fetch')
         }
 
-        console.log(result.ops)
-    })*/
+        console.log(task)
+    })
+
+    db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
+        console.log(tasks)
+    })
 })
