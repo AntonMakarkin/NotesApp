@@ -14,31 +14,30 @@ MongoClient.connect(connectionURL, { useUnifiedTopology: true}, { useNewUrlParse
 
     const db = client.db(databaseName)
 
-    /*db.collection('users').findOne({ _id: new ObjectID("605dcf5c6ae5f93c580a6bdf") }, (error, user) => {
-        if (error) {
-            return console.log('Unable to fetch')
+    /*db.collection('users').updateOne({
+        _id: new ObjectID("605dcf5c6ae5f93c580a6bdf")
+    }, {
+        $set: {
+            name: 'Mike'
+        },
+        $inc: {
+            age: 1
         }
-
-        console.log(user)
+    }).then((result) => {
+        console.log(result)
+    }).catch((error) => {
+        console.log(error)
     })*/
 
-    /*db.collection('users').find({ age: 20 }).toArray((error, users) => {
-        console.log(users)
-    })
-
-    db.collection('users').find({ age: 20 }).count((error, count) => {
-        console.log(count)
-    })*/
-
-    db.collection('tasks').findOne({ _id: new ObjectID("605dd3b83ad4f83d64f9c645") }, (error, task) => {
-        if (error) {
-            return console.log('Unable to fetch')
+    db.collection('tasks').updateMany({
+        completed: false
+    }, {
+        $set: {
+            completed: true
         }
-
-        console.log(task)
-    })
-
-    db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
-        console.log(tasks)
+    }).then((result) => {
+        console.log(result.modifiedCount)
+    }).catch((error) => {
+        console.log(error)
     })
 })
