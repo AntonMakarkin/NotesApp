@@ -1,6 +1,7 @@
 import express from 'express'
 import DBconnect from './db/mongoose.js'
 import User from './models/user.js'
+import Task from './models/task.js'
 
 DBconnect()
 
@@ -17,7 +18,16 @@ app.post('/users', (req, res) => {
     }).catch((e) => {
         res.status(400).send(e)
     })
-    //res.send('Pidor')
+})
+
+app.post('/tasks', (req, res) => {
+    const task = new Task(req.body)
+
+    task.save().then(() => {
+        res.status(201).send(task)
+    }).catch((e) => {
+        res.status(400).send(e)
+    })
 })
 
 app.listen(port, () => {

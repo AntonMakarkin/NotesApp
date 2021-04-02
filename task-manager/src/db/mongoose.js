@@ -10,41 +10,5 @@ const DBconnect = () => {
     })
 }
 
-
-/*const me = new User({
-    name: '   Elena  ',
-    email: 'elenam1971@yandex.com   ',
-    password: 'phone098!'
-
-})
-
-me.save().then(() => {
-    console.log(me)
-}).catch((error) => {
-    console.log('Error!', error)
-})*/
-
-/*const Task = mongoose.model('Task', {
-    description: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    completed: {
-        type: Boolean,
-        default: false
-    }
-})
-
-const task = new Task({
-    description: '  Finish the 10 tasks     ',
-})
-
-task.save().then(() => {
-    console.log(task)
-}).catch((error) => {
-    console.log(error)
-})*/
-
 export default DBconnect
 
