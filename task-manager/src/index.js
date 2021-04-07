@@ -25,7 +25,7 @@ app.post('/users', async (req, res) => {
 app.get('/users', async (req, res) => {
     try {
         const users = await User.find({})
-        res.status(200).send(users)
+        res.send(users)
     } catch(e) {
         res.status(500).send(e)
     }
@@ -41,7 +41,7 @@ app.get('/users/:id', async (req, res) => {
             return res.status(404).send()
         }
 
-        res.status(200).send(user)
+        res.send(user)
     } catch (e) {
         res.status(500).send()
     }
@@ -63,9 +63,23 @@ app.patch('/users/:id', async (req, res) => {
             return res.status(404).send()
         }
 
-        res.status(200).send(user)
+        res.send(user)
     } catch (e) {
         res.status(400).send(e)
+    }
+})
+
+app.delete('/users/:id', async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id)
+
+        if (!user) {
+            return res.status(404).send()
+        }
+
+        res.send(user)
+    } catch(e) {
+        res.status(400).send()
     }
 })
 
@@ -85,7 +99,7 @@ app.post('/tasks', async (req, res) => {
 app.get('/tasks', async (req, res) => {
     try {
         const tasks = await Task.find({})
-        res.status(200).send(tasks)
+        res.send(tasks)
     } catch(e) {
         res.status(500).send(e)
     }
@@ -101,9 +115,9 @@ app.get('/tasks/:id', async (req, res) => {
             return res.status(404).send()
         }
 
-        res.status(200).send(task)
+        res.send(task)
     } catch(e) {
-        res.status(500).send()
+        res.status(400).send()
     }
 
 })
@@ -124,7 +138,21 @@ app.patch('/tasks/:id', async (req, res) => {
             return res.status(404).send()
         }
 
-        res.status(200).send(task)
+        res.send(task)
+    } catch(e) {
+        res.status(400).send(e)
+    }
+})
+
+app.delete('/tasks/:id', async (req, res) => {
+    try {
+        const task = await Task.findByIdAndDelete(req.params.id)
+
+        if (!task) {
+            return res.status(404).send()
+        }
+
+        res.send(task)
     } catch(e) {
         res.status(400).send(e)
     }
