@@ -83,7 +83,7 @@ userSchema.pre('save', async function(next) { //not arrow-functions
         user.password = await bcrypt.hash(user.password, 8)
     }
 
-    next()
+    next() //middleware function is finished
 })
 
 const User = mongoose.model('User', userSchema)
