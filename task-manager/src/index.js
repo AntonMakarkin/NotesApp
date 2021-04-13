@@ -17,10 +17,10 @@ const port = process.env.PORT || 3000
     }
 })*/
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.status(503).send('Maintenance works on server. Please, come back later')
     next()
-})
+})*/
 
 app.use(express.json())
 app.use(userRouter)
@@ -31,7 +31,7 @@ app.listen(port, () => {
     console.log(`Server is up on port ${port}`)
 })
 
-const myFunction = async () => {
+/*const myFunction = async () => {
     const token = jwt.sign({ _id: 'abc123' }, 'thisismynewcourse', { expiresIn: '7 days'})
     console.log(token)
 
@@ -39,4 +39,4 @@ const myFunction = async () => {
     console.log(data)
 }
 
-myFunction()
+myFunction()*/
