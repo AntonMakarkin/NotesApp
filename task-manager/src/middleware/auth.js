@@ -11,6 +11,7 @@ const auth = async (req, res, next) => {
             throw new Error()
         }
 
+        req.token = token //send token to the root handler
         req.user = user //send information to the root handler
         next()
     } catch (e) {
