@@ -3,24 +3,13 @@ import DBconnect from './db/mongoose.js'
 import userRouter from './routers/users.js'
 import taskRouter from './routers/tasks.js'
 import jwt from 'jsonwebtoken'
+import Task from './models/task.js'
+import User from './models/user.js'
 
 DBconnect()
 
 const app = express()
 const port = process.env.PORT || 3000
-
-/*app.use((req, res, next) => {
-    if (req.method === 'GET') {
-        res.send('GET requests are disabled')
-    } else {
-        next() //middleware function is finished
-    }
-})*/
-
-/*app.use((req, res, next) => {
-    res.status(503).send('Maintenance works on server. Please, come back later')
-    next()
-})*/
 
 app.use(express.json())
 app.use(userRouter)
@@ -31,13 +20,14 @@ app.listen(port, () => {
     console.log(`Server is up on port ${port}`)
 })
 
+const main = async () => {
+    /*const task = await Task.findById('60774708166ee35984206554')
+    await task.populate('owner').execPopulate() //to connect with the user collection
+    console.log(task.owner)*/
 
-/*const pet = {
-    name: 'Hal'
+    const user = await User.findById('6077419f83bf0b2a30251339')
+    await user.populate('tasks').execPopulate()
+    console.log(user.tasks)
 }
 
-pet.toJSON = function () {
-    return {}
-}
-
-console.log(JSON.stringify(pet))*/
+main()
