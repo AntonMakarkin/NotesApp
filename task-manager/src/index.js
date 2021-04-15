@@ -21,13 +21,13 @@ app.listen(port, () => {
 })
 
 const main = async () => {
-    /*const task = await Task.findById('60774708166ee35984206554')
+    const task = await Task.findById('60774708166ee35984206554')
     await task.populate('owner').execPopulate() //to connect with the user collection
-    console.log(task.owner)*/
+    console.log(task.owner)
 
-    const user = await User.findById('6077419f83bf0b2a30251339')
+    /*const user = await User.findById('6077419f83bf0b2a30251339')
     await user.populate('tasks').execPopulate()
-    console.log(user.tasks)
+    console.log(user.tasks)*/
 }
 
 main()
