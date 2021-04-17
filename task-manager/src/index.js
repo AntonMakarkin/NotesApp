@@ -24,7 +24,7 @@ const upload = multer({
             return cb(new Error('Please upload a Word document'))
         }
 
-        cb(undefined, true)
+        cb(undefined, true) //to accept the file
     }
 })
 
