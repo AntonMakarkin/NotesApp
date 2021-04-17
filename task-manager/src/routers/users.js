@@ -1,6 +1,7 @@
 import express, { request } from 'express'
 import User from '../models/user.js'
 import auth from '../middleware/auth.js'
+import multer from 'multer'
 const router = new express.Router()
 
 //users routes
@@ -79,6 +80,14 @@ router.delete('/users/me', auth, async (req, res) => {
     } catch(e) {
         res.status(400).send()
     }
+})
+
+const upload = multer({
+    dest: 'avatars'
+})
+
+router.post('/users/me/avatar', upload.single('avatar') , (req, res) => {
+    res.send()
 })
 
 export default router
