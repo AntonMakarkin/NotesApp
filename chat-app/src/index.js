@@ -14,16 +14,15 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 // Setup static directory to serve (load at first)
 app.use(express.static(publicDirectoryPath))
 
-let count = 0
+const message = 'Welcome'
 
 io.on('connection', (socket) => {
     console.log('New websocket connection')
 
-    socket.emit('countUpdated', count)
+    socket.emit('message', message)
 
-    socket.on('increment', () => {
-        count++
-        io.emit('countUpdated', count)
+    socket.on('sendMessage', (message) => {
+        io.emit('message', message)
     })
 })
 
