@@ -1,9 +1,9 @@
-import express, { request } from 'express'
-import User from '../models/user.js'
-import auth from '../middleware/auth.js'
-import { sendWelcomeEmail, sendByeEmail } from '../emails/account.js'
-import multer from 'multer'
-import sharp from 'sharp'
+const express = require('express')
+const User = require('../models/user.js')
+const auth = require('../middleware/auth.js')
+const { sendWelcomeEmail, sendByeEmail } = require('../emails/account.js')
+const multer = require('multer')
+const sharp = require('sharp')
 const router = new express.Router()
 
 //users routes
@@ -129,4 +129,4 @@ router.get('/users/:id/avatar', async (req, res) => {
     }
 })
 
-export default router
+module.exports = router

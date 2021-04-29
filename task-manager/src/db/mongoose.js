@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const DBconnect = () => {
     mongoose.connect(process.env.MONGODB_URL, { 
@@ -9,5 +9,5 @@ const DBconnect = () => {
     })
 }
 
-export default DBconnect
+module.exports = DBconnect
 
