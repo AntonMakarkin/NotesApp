@@ -17,11 +17,17 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 // Setup static directory to serve (load at first)
 app.use(express.static(publicDirectoryPath))
 
+//socket.emit = to one client; io.emit = to everyone; socket.broadcast.emit = to everyone except one
+//io.to.emit = to everyone in room; socket.broadcast.to.emit
 io.on('connection', (socket) => {
     console.log('New websocket connection')
 
-    socket.emit('message', generateMessage('Welcome'))
-    socket.broadcast.emit('message', generateMessage())
+    socket.on('join', ({ username, room }) => {
+        socket.join(room)
+
+        socket.emit('message', generateMessage('Welcome'))
+        socket.broadcast.to(room).emit('message', generateMessage(`${username} has joined!`))
+    })
 
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter()
@@ -30,7 +36,7 @@ io.on('connection', (socket) => {
             return callback('Profanity is not allowed')
         }
 
-        io.emit('message', generateMessage(message))
+        io.to('Moscow').emit('message', generateMessage(message))
         callback('Delivered')
     })
 
