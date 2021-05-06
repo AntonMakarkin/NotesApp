@@ -76,7 +76,12 @@ $sendLocationButton.addEventListener('click', (e) => {
 
 })
 
-socket.emit('join', { username, room })
+socket.emit('join', { username, room }, (error) => {
+    if (error) {
+        alert(error)
+        location.href = '/'
+    }
+})
 
 /*document.querySelector('#increment').addEventListener('click', () => {
     console.log('Clicked')
